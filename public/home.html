@@ -1,152 +1,206 @@
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) window.location.reload();
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=111410849575332";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<script>
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) window.location.reload();
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=111410849575332";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 <section class="row">
-             
-             <section id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-       <li data-target="#myCarousel" data-slide-to="4"></li>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <section class="carousel-inner" role="listbox">
-    <section class="item active">
-      <img src="Content/img/trending/home4.png" >
-      <section class="carousel-caption">
-       
-      </section>
-    </section>
-    <section class="item">
-      <img src="Content/img/trending/home2.png" alt="Chania">
-      <section class="carousel-caption">
-        
-      </section>
-    </section>
-      <section class="item">
-      <img src="Content/img/hom1.png" >
-      <section class="carousel-caption">
-      </section>
-              </section>
-    <section class="item">
-      <img src="Content/img/trending/home3.png" >
-      <section class="carousel-caption">
-     
-      </section>
-    </section>
-
-      <section class="item">
-      <img src="Content/img/carousel/5.png" >
-      <section class="carousel-caption">
-        
-      </section>
-    </section>
-  </section>
-
-  <!-- Left and right controls -->
-  <a class="left carousel-control" data-target="#myCarousel" role="button" data-slide="prev">
+    <section id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <section class="carousel-inner" role="listbox">
+            <section class="item active">
+                <img src="Content/img/trending/home4.png">
+                <section class="carousel-caption">
+                </section>
+            </section>
+            <section class="item">
+                <img src="Content/img/trending/home2.png" alt="Chania">
+                <section class="carousel-caption">
+                </section>
+            </section>
+            <section class="item">
+                <img src="Content/img/hom1.png">
+                <section class="carousel-caption">
+                </section>
+            </section>
+            <section class="item">
+                <img src="Content/img/trending/home3.png">
+                <section class="carousel-caption">
+                </section>
+            </section>
+            <section class="item">
+                <img src="Content/img/carousel/5.png">
+                <section class="carousel-caption">
+                </section>
+            </section>
+        </section>
+        <!-- Left and right controls -->
+        <a class="left carousel-control" data-target="#myCarousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" data-target="#myCarousel" role="button" data-slide="next">
+        <a class="right carousel-control" data-target="#myCarousel" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+    </section>
 </section>
-             </section>
-             <section class="row mt-10">
-            <section class="col-md-3 schedule-md">
-                 
-               <section class="col-md-12 col-sm-12"> <h3 class="mt-20">SCHEDULE<a href ="#/events" class="pull-right all-events-link">All Events</a></h3>
-                <div class="list-group"> <a ng-repeat ="event in events" href="/#/event/{{event.id}}" class="list-group-item no-padding"><section class="list-group-item-text"><div class="input-group">
-  <span class="input-group-addon no-padding event-date" id="sizing-addon1"><section class="date-section"><span class="font-2">{{event.startDay}}</span><br><span class="font-month">{{event.startMonth}} '{{event.startYear}}</span></section></span>
-  <section class="col-md-12 ml-8"><span class="event-title">{{event.slicedName}} ..</span><br><span class="event-text">{{event.slicedDesc}} ...</span></section>
-</div></section></a>  </div></section>
+<section class="row mt-10">
+    <section class="col-md-3 schedule-md">
+        <section class="col-md-12 col-sm-12">
+            <h3 class="mt-20">SCHEDULE<a href ="#/events" class="pull-right all-events-link">All Events</a></h3>
+            <div class="list-group">
+                <a ng-repeat="event in events" href="/#/event/{{event.id}}" class="list-group-item no-padding">
+                    <section class="list-group-item-text">
+                        <div class="input-group">
+                            <span class="input-group-addon no-padding event-date" id="sizing-addon1"><section class="date-section"><span class="font-2">{{event.startDay}}</span>
+                            <br><span class="font-month">{{event.startMonth}} '{{event.startYear}}</span></section>
+                    </span>
+                    <section class="col-md-12 ml-8"><span class="event-title">{{event.slicedName}} ..</span>
+                        <br><span class="event-text">{{event.slicedDesc}} ...</span></section>
+                    </div>
+        </section>
+        </a>
+        </div>
+    </section>
 </section>
-                 <section class="col-md-6 col-sm-12">
-                 <section class="col-md-12">
-                      <section class="col-md-12 text-center logo-text-para">school of santhi</section>
-                     </section>
-                      
-<section class="col-md-12 font-16">
-                         <div class="fb-quote"></div>
-    <p></p>
-                         <p><em>Love is the source...and it is in every one of us!</em></p>
-
-<p>It was the love of his Masters that transformed Santhi and it is the same love that he emanates in his teachings today which enables one to look into one’s own nature and fully transform. When Santhi speaks, it reaches one’s soul and not mind. It will empower you to fully feel, understand and realize the true power of your own self and love - the actual essence of yoga.</p>
-<p>The world is so hallucinating that we are grabbed fully by its experience. We are often self-assured and believe that we understand everything around us. Santhi challenges our beliefs and guides us into seeing things in a different way - a way in which you start looking deeply within yourself, see all the subtle aspects of the mind and its relation with prana - the vital force. You will learn to understand yourself without the backing of any concepts whatsoever.</p>
-<p>Founded in 1992 by Master Santhi Prasad, School of Santhi focuses on improving and transforming people’s lives by disseminating the science of yoga in its entirety, blending ancient wisdom with modern thoughts.</p><p><a href="/#/about">..Read More</a></p>
-                     <p class="slogan" title="Click to watch video" ng-click=goToUrl("https://www.youtube.com/watch?v=D7V1IjzzFyI")>yogah citta vritti nirodha</p>
+<section class="col-md-6 col-sm-12">
+    <section class="col-md-12">
+        <section class="col-md-12 text-center logo-text-para">school of santhi</section>
+    </section>
+    <section class="col-md-12 font-16">
+        <div class="fb-quote"></div>
+        <p></p>
+        <p><em>Love is the source...and it is in every one of us!</em></p>
+        <p>It was the love of his Masters that transformed Santhi and it is the same love that he emanates in his teachings today which enables one to look into one’s own nature and fully transform. When Santhi speaks, it reaches one’s soul and not mind. It will empower you to fully feel, understand and realize the true power of your own self and love - the actual essence of yoga.</p>
+        <p>The world is so hallucinating that we are grabbed fully by its experience. We are often self-assured and believe that we understand everything around us. Santhi challenges our beliefs and guides us into seeing things in a different way - a way in which you start looking deeply within yourself, see all the subtle aspects of the mind and its relation with prana - the vital force. You will learn to understand yourself without the backing of any concepts whatsoever.</p>
+        <p>Founded in 1992 by Master Santhi Prasad, School of Santhi focuses on improving and transforming people’s lives by disseminating the science of yoga in its entirety, blending ancient wisdom with modern thoughts.</p>
+        <p><a href="/#/about">..Read More</a></p>
+        <p class="slogan" title="Click to watch video" ng-click=goToUrl( "https://www.youtube.com/watch?v=D7V1IjzzFyI")>yogah citta vritti nirodha</p>
+    </section>
 </section>
-                
-                 </section>
-                 <section class="col-sm-12 schedule-sm">
-                 
-               <section class="col-md-12 col-sm-12"> <h3 class="mt-20">SCHEDULE<a href ="#/events" class="pull-right all-events-link">All Events</a></h3>
-                <div class="list-group"> <a ng-repeat ="event in events" href="/#/event/{{event.id}}" class="list-group-item no-padding"><section class="list-group-item-text"><div class="input-group">
-  <span class="input-group-addon no-padding event-date" id="sizing-addon1"><section class="date-section"><span class="font-2">{{event.startDay}}</span><br><span class="font-month">{{event.startMonth}} '{{event.startYear}}</span></section></span>
-  <section class="col-md-12 ml-8"><span class="event-title">{{event.name}}</span><br><span class="event-text">{{event.slicedDesc}} ...</span></section>
-</div></section></a>  </div></section>
+<section class="col-sm-12 schedule-sm">
+    <section class="col-md-12 col-sm-12">
+        <h3 class="mt-20">SCHEDULE<a href ="#/events" class="pull-right all-events-link">All Events</a></h3>
+        <div class="list-group">
+            <a ng-repeat="event in events" href="/#/event/{{event.id}}" class="list-group-item no-padding">
+                <section class="list-group-item-text">
+                    <div class="input-group">
+                        <span class="input-group-addon no-padding event-date" id="sizing-addon1"><section class="date-section"><span class="font-2">{{event.startDay}}</span>
+                        <br><span class="font-month">{{event.startMonth}} '{{event.startYear}}</span></section>
+                </span>
+                <section class="col-md-12 ml-8"><span class="event-title">{{event.name}}</span>
+                    <br><span class="event-text">{{event.slicedDesc}} ...</span></section>
+                </div>
+    </section>
+    </a>
+    </div>
 </section>
-                 <section class="col-md-3 col-sm-12">
-                     <section class="col-md-12 col-sm-6"> <section class="col-md-12 col-sm-12 pad-0"><section class="col-md-4 col-sm-4 text-center pad-2"><img class="img-logo" src="Content/img/11.png" ng-click=goToUrl("http://www.internationalyogafederation.net/fiyorganizations.html")></section><section class="col-md-4 col-sm-4 text-center pad-2"><img ng-click=goToUrl("https://www.yogaalliance.org/SchoolPublicProfile?sid=2553&lid=2553") src="Content/img/RYS%20200-AROUND-BLACK.jpg" class="img-logo"></section><section class="col-md-4 col-sm-4 text-center pad-2"><img ng-click=goToUrl("https://www.yogaalliance.org/SchoolPublicProfile?sid=2553&lid=2553")  class="img-logo" src="Content/img/RYS%20500-AROUND-BLACK.jpg"></section></section></section>
-                 <section class="col-md-12 col-sm-6 mt-20"> <div class="panel panel-default">
-  <div class="panel-body">
-    <i class="fa fa-quote-left" aria-hidden="true"></i><blockquote class="blockquote-reverse">
+</section>
+<section class="col-md-3 col-sm-12">
+    <section class="col-md-12 col-sm-6">
+        <section class="col-md-12 col-sm-12 pad-0">
+            <section class="col-md-4 col-sm-4 text-center pad-2"><img class="img-logo" src="Content/img/11.png" ng-click=goToUrl( "http://www.internationalyogafederation.net/fiyorganizations.html")></section>
+            <section class="col-md-4 col-sm-4 text-center pad-2"><img ng-click=goToUrl( "https://www.yogaalliance.org/SchoolPublicProfile?sid=2553&lid=2553") src="Content/img/RYS%20200-AROUND-BLACK.jpg" class="img-logo"></section>
+            <section class="col-md-4 col-sm-4 text-center pad-2"><img ng-click=goToUrl( "https://www.yogaalliance.org/SchoolPublicProfile?sid=2553&lid=2553") class="img-logo" src="Content/img/RYS%20500-AROUND-BLACK.jpg"></section>
+        </section>
+    </section>
+    <section class="col-md-12 col-sm-6 mt-20">
+        <div class="panel panel-default custom-news-panel">
+            <div class="panel-body">
+                <div class="news-heading">News</div>
+                <div class="news-content">
+                    <div class="news-body" ng-repeat="newsItem in newsItems">
+                        <div class="news-title" data-toggle="modal" data-target="#detailedNewsModal" ng-click="showSelectedNews(newsItem)">{{newsItem.title}}</div>
+                        <div class="news-description" data-toggle="modal" data-target="#detailedNewsModal" ng-click="showSelectedNews(newsItem)">{{newsItem.highlight}}</div>
+                    </div>
+                </div>
+                <!--  <i class="fa fa-quote-left" aria-hidden="true"></i><blockquote class="blockquote-reverse">
   <h4>Open your eyes wide to see existence as it is. Otherwise you will simply miss the truth of living.</h4>
   <footer>Swami Santhiprasad</footer>
 </blockquote>
-                <i class="fa fa-quote-right pull-right" aria-hidden="true"></i>
-  </div>
-</div></section> <section class="col-md-12 col-sm-12 pad-0" ><div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/uAqMsWaVSIY" allowfullscreen></iframe>
-</div></section></section>
-             </section>
-             <section class="row">
-                 <section class="col-md-12">
-                     <h3 class="ml-17">PROGRAMS</h3>
-                      <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <img src="Content/img/trending/himalayas.jpg"   alt="...">
-      <div class="caption">
-        <h3> Workshops and Spiritual Retreats</h3>
-        <p class="mb-25">With a warm and loving approach, Santhi gives the audience an opportunity to understand themselves and provides tools to improve the quality of life in his workshops.</p>
-        <p><a href="/#/program/workshops" class="btn btn-primary" role="button">Read More..</a></p>
-      </div>
-    </div>
-  </div>
-                      <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <img src="Content/img/trending/lamp.jpg">
-     <div class="caption">
-         <h3>Satsangs</h3>
-         <p>The uniqueness of Satsang with Santhi is that he starts the session with meditation. In the guided meditation he brings the participants into a state of deep relaxation. He leads them to stillness; allows them to relax with their inner witness.</p>
-        <p><a href="/#/program/satsangs" class="btn btn-primary" role="button">Read More..</a></p>
-      </div>
-    </div>
-  </div>
-                      <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-      <img src="Content/img/trending/DSC_1055.JPG">
-      <div class="caption">
-        <h3>Teacher Training Courses</h3>
-        <p class="mb-25"> Our Teacher Training courses aim at reforming seekers into masters of yoga and aids in one’s complete transformation in accordance with the ancient Gurukula System. Join our courses to learn this art!! </p>
-<p><a href="/#/program/TTC" class="btn btn-primary" role="button">Read More..</a></p>
-      </div>
-    </div>
-  </div>
-                      <div class="col-sm-6 col-md-3">
-                      <div class="thumbnail" >
-                         <div class="fb-page" data-href="https://www.facebook.com/SchoolOfSanthiIndia/" data-tabs="timeline" data-height="460px" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/SchoolOfSanthiIndia/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/SchoolOfSanthiIndia/">School of Santhi - India</a></blockquote></div>
-    </div></div>
-                    </section>
-          </section>
+                <i class="fa fa-quote-right pull-right" aria-hidden="true"></i> -->
+            </div>
+            <!-- Modal -->
+            <div id="detailedNewsModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div>{{newsTitle}}</div>
+                        </div>
+                        <div class="modal-body">
+                            <div>{{newsDescription}}</div>
+                            <div style="display: inline-block; width: 100%;">
+                                <button type="button" class="btn btn-success pull-right" ng-click="closeNewsModal()">Close</button>
+                            </div>
+                        </div>
+                        <!-- <div class="modal-footer">
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="col-md-12 col-sm-12 pad-0">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/uAqMsWaVSIY" allowfullscreen></iframe>
+        </div>
+    </section>
+</section>
+</section>
+<section class="row">
+    <section class="col-md-12">
+        <h3 class="ml-17">PROGRAMS</h3>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="Content/img/trending/himalayas.jpg" alt="...">
+                <div class="caption">
+                    <h3> Workshops and Spiritual Retreats</h3>
+                    <p class="mb-25">With a warm and loving approach, Santhi gives the audience an opportunity to understand themselves and provides tools to improve the quality of life in his workshops.</p>
+                    <p><a href="/#/program/workshops" class="btn btn-primary" role="button">Read More..</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="Content/img/trending/lamp.jpg">
+                <div class="caption">
+                    <h3>Satsangs</h3>
+                    <p>The uniqueness of Satsang with Santhi is that he starts the session with meditation. In the guided meditation he brings the participants into a state of deep relaxation. He leads them to stillness; allows them to relax with their inner witness.</p>
+                    <p><a href="/#/program/satsangs" class="btn btn-primary" role="button">Read More..</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="Content/img/trending/DSC_1055.JPG">
+                <div class="caption">
+                    <h3>Teacher Training Courses</h3>
+                    <p class="mb-25"> Our Teacher Training courses aim at reforming seekers into masters of yoga and aids in one’s complete transformation in accordance with the ancient Gurukula System. Join our courses to learn this art!! </p>
+                    <p><a href="/#/program/TTC" class="btn btn-primary" role="button">Read More..</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <div class="fb-page" data-href="https://www.facebook.com/SchoolOfSanthiIndia/" data-tabs="timeline" data-height="460px" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                    <blockquote cite="https://www.facebook.com/SchoolOfSanthiIndia/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/SchoolOfSanthiIndia/">School of Santhi - India</a></blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

@@ -810,3 +810,59 @@ h2.title {
 }
 
 /*****End Login Page*******/
+
+.custom-news-panel {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.custom-news-panel .panel-body {
+    padding: 0px;
+    overflow-y: scroll;
+}
+.news-heading {
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    vertical-align: middle;
+    background-color: #5a849e;
+    color: white;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    font-size: 18px;
+    padding-top: 5px;
+}
+
+.news-body {
+    height: 60px;
+    font-size: 13px;
+}
+.news-title {
+    padding: 25px 20px 0;
+    color: #2fa0e7;
+    white-space: nowrap;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.news-description {
+    padding: 0px 20px;  
+    cursor: pointer;
+    max-height: 35px;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}

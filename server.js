@@ -40,6 +40,11 @@ app.post('/api/edit/event',function(req,res){
     res.status(200).send("Event has been saved successfully!!");
 });
 
+app.post('/api/save/news',function(req,res){ 
+    service.saveNews(req.body);
+    res.status(200).send("News has been saved successfully!!");
+});
+
 app.post('/api/yogablog/save',function(req,res){ 
     service.saveYogaBlog(req.body);
     res.status(200).send("The blog has been saved successfully!!");
@@ -97,6 +102,15 @@ app.get('/api/yoga/getblog/:id',function(req,res){
 app.get('/api/event/getAll',function(req,res){
     var events ;
      service.ReadAllEvents().then((result)=>{     
+        res.send(result);
+    }).catch(function (error) {
+     res.status(500).send(error);   
+});
+});
+
+app.get('/api/news/getAll',function(req,res){
+    var events ;
+     service.ReadAllNews().then((result)=>{     
         res.send(result);
     }).catch(function (error) {
      res.status(500).send(error);   

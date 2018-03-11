@@ -6,28 +6,58 @@ sosSettings.config(function($routeProvider, $locationProvider) {
             templateUrl: "/views/create-event.html",
             controller: "eventController"
         })
-    .otherwise({
+        .otherwise({
             templateUrl: "/views/settings.html",
             controller: "settingsController"
         });
 });
 
-sosSettings.controller('settingsController', ['$scope', '$http', function ($scope, $http) {
-    $scope.logout = function () {
-        $http.get('/api/logout').then(function () {
+sosSettings.controller('settingsController', ['$scope', '$http', function($scope, $http) {
+    $scope.news = {};
+    $scope.newsDataSet = [];
+    $scope.logout = function() {
+        $http.get('/api/logout').then(function() {
             location.href = '../#/login';
-        })    
+        })
     }
-    
+
+    $scope.saveNews = function() {
+
+        if (!$scope.news.title || !$scope.news.description || !$scope.news.highlight) {
+            return;
+        }
+        var data = {
+            title: $scope.news.title,
+            description: $scope.news.description,
+            highlight: $scope.news.highlight
+        }
+        $http.post('/api/save/news', data).then(function(result) {
+            console.log(result);
+            $scope.news.title = '';
+            $scope.news.description = '';
+            $scope.news.highlight = '';
+            getAllNews();
+        })
+    }
+    getAllNews();
+
+    function getAllNews() {
+        $http.get('/api/news/getAll').then(function(res) {
+            //$scope.newsDataSet = [];
+            console.log(res);
+            $scope.newsDataSet = res.data;
+        });
+    }
+
+
 }])
-sosSettings.controller('eventsGridController', ['$scope','$location', function($scope,$location) {
-        $scope.editForm = function(id){
-            var loc = '/settings/#/edit/event/'+id;
+sosSettings.controller('eventsGridController', ['$scope', '$location', function($scope, $location) {
+    $scope.editForm = function(id) {
+        var loc = '/settings/#/edit/event/' + id;
         window.location.href = loc;
-        };
-        
-    }
-]);
+    };
+
+}]);
 sosSettings.directive('fileModel', ['$parse', function($parse) {
     return {
         restrict: 'A',
@@ -48,10 +78,10 @@ sosSettings.directive('fileModel', ['$parse', function($parse) {
         }
     };
 }]);
-sosSettings.controller('eventController', ['$scope','$http','$routeParams', function($scope,$http,$routeParams) {
-     $(document).ready(function() {
+sosSettings.controller('eventController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+    $(document).ready(function() {
         $('.selectpicker').selectpicker();
-//$scope.event.type = $scope.event.type;
+        //$scope.event.type = $scope.event.type;
         $('#summernote').summernote();
         $('#datetimepicker1').datetimepicker({
             format: 'DD-MMM-YYYY'
@@ -71,59 +101,59 @@ sosSettings.controller('eventController', ['$scope','$http','$routeParams', func
 
     });
     $scope.addRow = function() {
-            $scope.event.schedule.push({
-                starts: "",
-                ends: "",
-                schedule: ""
-            });
-        };
-        $scope.deleteRow = function(item) {
-            $scope.event.schedule = _.reject($scope.event.schedule, function(obj) {
-                return obj == item;
-            });
-        };
-      $scope.types = [{
-            name: "TTC"
-        }, {
-            name: "Satsang"
-        }, {
-            name: "Workshops"
-        }, {
-            name: "Retreats"
-        }];
-    $scope.event = {
-            type: "TTC",
-            schedule: [{
-                starts: "",
-                ends: "",
-                schedule: ""
-            }]
-        };
-  $http.get("/api/event/getEvent/" + $routeParams.id).then(function(response, err) {
-            if (err)
-                return;
-            $scope.types = [{
-            name: "TTC"
-        }, {
-            name: "Satsang"
-        }, {
-            name: "Workshops"
-        }, {
-            name: "Retreats"
-        }];
-            $scope.event = response.data;
-   $scope.selectedType = $scope.event.type;
-$('#summernote').summernote('insertNode', $($scope.event.description)[0]);
+        $scope.event.schedule.push({
+            starts: "",
+            ends: "",
+            schedule: ""
         });
-  $scope.save = function(eve) {
-            eve.startDate = $('#datetimepicker1').data("DateTimePicker").date().format("DD/MMM/YYYY");
-            eve.endDate = $('#datetimepicker2').data("DateTimePicker").date().format("DD/MMM/YYYY");
-            eve.regClosesOn = $('#datetimepicker3').data("DateTimePicker").date().format("DD/MMM/YYYY");
-            eve.description = $('#summernote').summernote('code');
+    };
+    $scope.deleteRow = function(item) {
+        $scope.event.schedule = _.reject($scope.event.schedule, function(obj) {
+            return obj == item;
+        });
+    };
+    $scope.types = [{
+        name: "TTC"
+    }, {
+        name: "Satsang"
+    }, {
+        name: "Workshops"
+    }, {
+        name: "Retreats"
+    }];
+    $scope.event = {
+        type: "TTC",
+        schedule: [{
+            starts: "",
+            ends: "",
+            schedule: ""
+        }]
+    };
+    $http.get("/api/event/getEvent/" + $routeParams.id).then(function(response, err) {
+        if (err)
+            return;
+        $scope.types = [{
+            name: "TTC"
+        }, {
+            name: "Satsang"
+        }, {
+            name: "Workshops"
+        }, {
+            name: "Retreats"
+        }];
+        $scope.event = response.data;
+        $scope.selectedType = $scope.event.type;
+        $('#summernote').summernote('insertNode', $($scope.event.description)[0]);
+    });
+    $scope.save = function(eve) {
+        eve.startDate = $('#datetimepicker1').data("DateTimePicker").date().format("DD/MMM/YYYY");
+        eve.endDate = $('#datetimepicker2').data("DateTimePicker").date().format("DD/MMM/YYYY");
+        eve.regClosesOn = $('#datetimepicker3').data("DateTimePicker").date().format("DD/MMM/YYYY");
+        eve.description = $('#summernote').summernote('code');
 
-            $http.post("/api/edit/event", eve).then(function(response) {
-                $scope.successAlert = response.data;
-            });
+        $http.post("/api/edit/event", eve).then(function(response) {
+            $scope.successAlert = response.data;
+        });
 
-        };
+    };
 }]);

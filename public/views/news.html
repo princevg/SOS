@@ -1,0 +1,55 @@
+<section class="row">
+    <form class="form-horizontal">
+        <h3 class="text-center">CREATE A NEWS</h3>
+        <hr />
+        <section class="col-md-12">
+            <div class="alert alert-success col-md-12" ng-hide="!successAlert">
+                <strong>{{successAlert}} </strong> <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+        </section>
+        <section class="col-md-5">
+            <section class="form-group">
+                <label class="control-label col-md-4">Title :</label>
+                <section class="col-md-8">
+                    <input class="form-control" ng-model="news.title" />
+                </section>
+            </section>
+            <section class="form-group">
+                <label class="control-label col-md-4">Higlight content :</label>
+                <section class="col-md-8">
+                    <input class="form-control" ng-model="news.highlight" />
+                </section>
+            </section>
+            <section class="form-group">
+                <label class="control-label col-md-4">Description :</label>
+                <section class="col-md-8">
+                    <textarea class="form-control" rows="5" ng-model="news.description"></textarea>
+                </section>
+         
+            </section>
+            <section>
+                <button type="submit" class="btn btn-info pull-right" ng-click="saveNews()">Save</button>
+            </section>
+        </section>
+    </form>
+</section>
+
+<section>
+  
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>  
+        <th scope="col">Title</td>
+        <th scope="col">Highlight</td>
+        <th scope="col">Description</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="newsData in newsDataSet">
+        <td>{{newsData.title}}</td>
+        <td>{{newsData.highlight}}</td>
+        <td>{{newsData.description}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
