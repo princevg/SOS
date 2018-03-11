@@ -1,0 +1,31 @@
+<section class="row">
+    <section class="col-md-12">
+        <form class="form-horizontal">
+            <h3 class="text-center">CREATE A NEW BLOG</h3>
+        <section class="col-md-12">
+                 <div class="alert alert-success col-md-12" ng-hide="!successAlert">
+  <strong>{{successAlert}} </strong> <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+</div></section>
+        <section class="col-md-12 text-center">
+             <section class="form-group">
+            <label class="control-label col-md-3">Title :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="blog.title"/></section>
+        </section>
+            <section class="form-group">
+            <label class="control-label col-md-3">Author :</label>
+            <section class="col-md-6"><input class="form-control" ng-model="blog.author"/></section>
+        </section>
+            <section class="form-group">
+            <label class="control-label col-md-3">Content :</label>
+            <section class="col-md-9"><div id="summernote"></div></section>
+        </section>
+            <section class="form-group">
+            <label class="control-label col-md-3">Thumbnail Image :</label>
+            <section class="col-md-3"><input type="file" class="form-control" file-model="blog.thumbnail"/></section>
+            </section>
+            <section class="form-group">
+            <button type="submit" class="btn btn-info" ng-click="saveYogaBlog(blog)">Save Blog</button></section>
+            </section>
+        </form>
+    </section>
+</section>

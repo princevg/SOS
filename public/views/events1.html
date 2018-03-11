@@ -1,0 +1,83 @@
+<section class="col-md-12" id="EventsForm" ng-controller="eventsGridController">
+    <section class="col-md-12">
+     <div id="jsGrid"></div>
+    </section>
+ 
+</section>
+
+<script>
+    var clients = [
+        { "Name": "Otto Clay", "Age": 25, "Country": 1, "Address": "Ap #897-1459 Quam Avenue", "Married": false },
+        { "Name": "Connor Johnston", "Age": 45, "Country": 2, "Address": "Ap #370-4647 Dis Av.", "Married": true },
+        { "Name": "Lacey Hess", "Age": 29, "Country": 3, "Address": "Ap #365-8835 Integer St.", "Married": false },
+        { "Name": "Timothy Henson", "Age": 56, "Country": 1, "Address": "911-5143 Luctus Ave", "Married": true },
+        { "Name": "Ramona Benton", "Age": 32, "Country": 3, "Address": "Ap #614-689 Vehicula Street", "Married": false }
+    ];
+    var MyDateField = function(config) {
+    jsGrid.Field.call(this, config);
+};
+ 
+MyDateField.prototype = new jsGrid.Field({
+ 
+    css: "date-field",            // redefine general property 'css'
+    align: "center",              // redefine general property 'align'
+ 
+    myCustomProperty: "foo",      // custom property
+ 
+    sorter: function(date1, date2) {
+        return new Date(date1) - new Date(date2);
+    },
+ 
+    itemTemplate: function(value) {
+        return new Date(value).toDateString();
+    },
+});
+ 
+jsGrid.fields.date = MyDateField;
+ $.ajax({
+            type: "GET",
+            url: '/api/event/getAll'
+        }).then(function(data){
+
+
+    $("#jsGrid").jsGrid({
+        width: "100%",
+        sorting: true,
+        paging: true,
+        filtering :true,
+        autoload: false,
+        pageSize: 5,
+        editing:true,
+        data: data,
+         deleteConfirm: function(item) {
+            return "The client \"" + item.name + "\" will be removed. Are you sure?";
+        },
+        onItemEditing: function(args) {
+           $('#EventsForm').scope().editForm(args.item.id);
+    },
+        controller:{
+            loadData: function(filter) {
+            return $.grep(data, function(client) {
+                return (!filter.name || client.name.toLowerCase().indexOf(filter.name.toLowerCase()) > -1)
+                    && (!filter.type || client.type.toLowerCase().indexOf(filter.type.toLowerCase()) > -1) ;
+            });
+        },
+        deleteItem: function(item) {
+                // debugger;
+        return $.ajax({
+            type: "DELETE",
+            url: "/api/delete/event",
+            data:{ "id":item.id}
+        });
+    }},
+        fields: [
+            { name: "name", type: "text",title:"Name", width: 150, validate: "required" },
+            { name: "type", type: "text",title:"Type", width: 50 },
+            { name: "startDate", type: "date",title:"Start Date", width: 50 },
+            { type: "control" }
+        ]
+    });
+ });
+ 
+</script>
+ 

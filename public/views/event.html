@@ -1,0 +1,151 @@
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) window.location.reload();
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=111410849575332";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<section class="row form-horizontal" >
+<section class="col-md-12">
+    
+   <img class ="img" ng-src="{{event.imageSrc}}" />
+</section>
+<section class="col-md-12 text-center">
+    <h1 class="heading">{{event.name}}</h1>
+    <h3 class="heading date-heading">{{event.startDay}} {{event.startMonth}} '{{event.startYear}} -  {{event.endDay}} {{event.endMonth}} '{{event.endYear}}</h3>
+</section>
+    <section class="col-md-12 text-center"><div class="fb-share-button" data-href="https://schoolofsanthi.in" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fschoolofsanthi.in%2F&amp;src=sdkpreparse">Share</a></div></section>
+    <section class="col-md-9 mt-10">
+    <section class="col-md-12 mb-10" id="description">
+      </section>
+        <section class="col-md-12"  ng-show = "event.type=='TTC'">
+        <div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" ng-click="toggleCaretIcon($event)" data-target="#syllabus">Syllabus <i class="fa fa-angle-double-down" ng-click="toggleCaret($event)" aria-hidden="true"></i></a>
+      </h4>
+    </div>
+    <div id="syllabus" class="panel-collapse collapse">
+      <div class="panel-body pre pad-top-0">{{event.syllabus}}</div>
+    </div>
+  </div>
+</div>
+        </section>
+<section class="col-md-12">
+    <div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" ng-click="toggleCaretIcon($event)" data-target="#course">Course Details <i class="fa fa-angle-double-up" ng-click="toggleCaret($event)" aria-hidden="true"></i></a>
+      </h4>
+    </div>
+    <div id="course" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <section class="col-md-6">
+<table class="table">
+<tbody>
+    <tr><td width=50%><i class="fa fa-book" aria-hidden="true"></i>&nbsp; <strong>Course/ Event Name</strong></td>
+        <td>{{event.name}}</td>
+    </tr>
+    <tr><td><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;<strong>Duration</strong></td>
+            <td>{{event.duration}}</td>
+    </tr>
+    <tr><td><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;<strong>Venue</strong></td>
+            <td>{{event.venue}}</td>
+    </tr>
+    <tr><td><i class="fa fa-language" aria-hidden="true"></i> &nbsp;<strong>Language</strong></td>
+            <td>{{event.language}}</td>
+    </tr>
+    <tr><td><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;<strong>Fee</strong></td>
+            <td>{{event.fee}}</td>
+    </tr>
+    <tr><td><i class="fa fa-clock-o" aria-hidden="true"></i> &nbsp;<strong>Registration closes on</strong></td>
+            <td>{{event.regClosesDay}} {{event.regClosesMonth}} {{event.regClosesYear}}</td> 
+    </tr>
+    <tr><td><i class="fa fa-calendar-check-o" aria-hidden="true"></i> &nbsp;<strong>Program Schedule</strong></td>
+            <td><a data-toggle="modal" data-target="#schedule">Click to open schedule</a></td>
+    </tr>
+    <tr><td><i class="fa fa-bed" aria-hidden="true"></i> &nbsp;<strong>Accomodation</strong></td>
+            <td>{{event.accomodation}}</td>
+    </tr>
+    
+    </tbody></table>
+    </section><section class="col-md-6">
+          <section class="col-md-12">
+          <table class="table">
+<tbody>
+    <tr><td width=45% ><i class="fa fa-cutlery" aria-hidden="true"></i> &nbsp;<strong> Food</strong></td>
+            <td>{{event.food}}</td>
+    </tr>
+    <tr><td><i class="fa fa-plane" aria-hidden="true"></i> &nbsp;<strong> Nearest Airport</strong></td>
+            <td>{{event.airport}}</td>
+    </tr>
+    <tr ng-show = "event.type=='TTC'"><td  width=50% ><i class="fa fa-male" aria-hidden="true"></i><i class="fa fa-female" aria-hidden="true"></i>&nbsp; <strong>Materials Provided </strong></td>
+        <td>{{event.materials}}</td>
+    </tr>
+    <tr  ng-show = "event.type=='TTC'"><td><i class="fa fa-users" aria-hidden="true"></i>&nbsp; <strong>Who can come?</strong></td>
+    <td>{{event.coursereq}}</td></tr>
+    </tbody>
+    </table></section>
+     <section class="col-md-12"><strong>Locate us on :</strong><ng-map class="map" ng-click="goToUrl(event.venue)" center="{{event.venue}}" zoom="15" default-style="false">
+        <marker position="{{event.venue}}"
+          animation="DROP"
+          draggable="true"></marker>
+      </ng-map></section>
+    
+   <section class="col-md-12  text-center mt-30"> <button class="btn btn-danger" ng-click="submitForm()">Click to Apply Now!</button></section>
+       </section></div>
+    </div>
+  </div>
+</div>  </section>
+    </section>
+        <section class="col-md-3">
+             <section class="col-md-12 pad-0"><section class="col-md-4 text-center pad-2"><img class="img-logo" src="Content/img/11.png" ng-click=goToUrl("http://www.internationalyogafederation.net/fiyorganizations.html")></section><section class="col-md-4 text-center pad-2"><img ng-click=goToUrl("https://www.yogaalliance.org/SchoolPublicProfile?sid=2553&lid=2553") src="Content/img/RYS%20200-AROUND-BLACK.jpg" class="img-logo"></section><section class="col-md-4 text-center pad-2"><img ng-click=goToUrl("https://www.yogaalliance.org/SchoolPublicProfile?sid=2553&lid=2553")  class="img-logo" src="Content/img/RYS%20500-AROUND-BLACK.jpg"></section></section>
+            <section class="col-md-12 pad-0 mt-10">
+                
+         <h3><p><strong>UPCOMING EVENTS</strong></p></h3>
+                
+               <section class="col-md-12 pad-0"> <div class="list-group"> <a ng-repeat ="event in filteredEvents" href="/#/event/{{event.id}}" class="list-group-item no-padding"><section class="list-group-item-text"><div class="input-group">
+  <span class="input-group-addon no-padding" id="sizing-addon1"><section class="date-section"><span class="font-2">{{event.startDay}}</span><br><span class="font-month">{{event.startMonth}} '{{event.startYear}}</span></section></span>
+  <section class="col-md-12"><span class="event-title">{{event.slicedName}} ..</span><br><span class="event-text">{{event.slicedDesc}} ...</span></section>
+                   </div></section></a>  </div></section><section class="col-md-12 pad-0"><a href ="#/events" class="pull-right font-16 all-events-link"><strong>All Events</strong></a></section></section>
+             <section class="col-md-12 mt-10"><section  class="mb-10 embed-responsive embed-responsive-16by9">
+ 
+</section></section>
+        </section>
+    
+    </section>
+
+ <div id="schedule" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Program Schedule</h4>
+      </div>
+      <div class="modal-body">
+          <table width="100%" class="table">
+              <thead>
+              <tr>
+    <th width="20%">Starts by</th>
+    <th width="20%">Ends by</th> 
+    <th width="60%">Schedule</th>
+  </tr>
+              </thead>
+          <tr ng-repeat="item in event.schedule" ng-model="event.schedule">
+              <td>{{item.starts}}</td>
+              <td>{{item.ends}}</td>
+              <td>{{item.schedule}}</td>
+              </tr></table>
+        </div>
+         <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+</div> 

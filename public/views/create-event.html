@@ -1,0 +1,140 @@
+<section class="row">
+<form class="form-horizontal">
+    <h3 class="text-center">CREATE A NEW EVENT</h3>
+    <section class="col-md-12">
+                 <div class="alert alert-success col-md-12" ng-hide="!successAlert">
+  <strong>{{successAlert}} </strong> <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+</div></section>
+    <section class="col-md-5">
+        <section class="form-group">
+            <label class="control-label col-md-4">Name :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="event.name"/></section>
+        </section>     
+        <section class="form-group">
+            <label class="control-label col-md-4">Type :</label>
+            <section class="col-md-8"><select class="selectpicker" data-width="100%" ng-model="event.type">
+                <option ng-repeat="type in types">{{type.name}}</option></select>
+</section>
+        </section>
+         <section class="form-group">
+            <label class="control-label col-md-4">Start Date :</label>
+            <section class="col-md-8">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" ng-model="event.startDate"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+           </section>
+        </section>
+        <section class="form-group">
+            <label class="control-label col-md-4">End Date :</label>
+            <section class="col-md-8">
+                <div class='input-group date' id='datetimepicker2' >
+                    <input type='text' class="form-control" ng-model="event.endDate"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+           </section>
+        </section>
+         <section class="form-group">
+            <label class="control-label col-md-4">Venue :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="event.venue" /></section>
+        </section>
+        <section class="form-group">
+            <label class="control-label col-md-4">Language :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="event.language"/></section>
+        </section>
+        <section class="form-group">
+            <label class="control-label col-md-4">Fee :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="event.fee"/></section>
+        </section>
+        <section class="form-group">
+            <label class="control-label col-md-4 pad-0">Registration closes on :</label>
+            <section class="col-md-8">
+                <div class='input-group date' id='datetimepicker3' >
+                    <input type='text' class="form-control" ng-model="event.regClosesOn"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+           </section>
+        </section>
+        <section class="form-group">
+            <label class="control-label col-md-4">Program schedule :</label>
+            <section class="col-md-8"><button class="btn btn-primary" data-toggle="modal" data-target="#scheduleForm">Click to add schedule</button></section>
+        </section>
+<section class="form-group">
+            <label class="control-label col-md-4">Accomodation :</label>
+    <section class="col-md-8"><input class="form-control" ng-model="event.accomodation"/></section>
+        </section>
+        <section class="form-group">
+            <label class="control-label col-md-4">Food :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="event.food"/></section>
+</section>
+
+        <section class="form-group">
+            <label class="control-label col-md-4">Nearest Airport :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="event.airport" /></section>
+        </section>
+    </section>
+    <section class="col-md-7">
+         <section class="form-group" ng-show="event.type=='TTC'">
+            <label class="control-label col-md-3">Who can attend :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="event.coursereq"/></section>
+</section>
+        <section class="form-group" ng-show="event.type=='TTC'">
+            <label class="control-label col-md-3">Material Provided :</label>
+            <section class="col-md-9"><textarea class="form-control" ng-model="event.materials"></textarea></section>
+        </section>
+        <section class="form-group" ng-show="event.type=='TTC'">
+            <label class="control-label col-md-3">Syllabus :</label>
+            <section class="col-md-9"><textarea class="form-control ht-100" ng-model="event.syllabus"></textarea></section>
+        </section>
+         <section class="form-group">
+            <label class="control-label col-md-3">Video URL :</label>
+            <section class="col-md-8"><input class="form-control" ng-model="event.video"/></section>
+</section>
+        <section class="form-group">
+            <label class="control-label col-md-3">Event Image :</label>
+            <section class="col-md-6"><input type="file" class="form-control" file-model="event.image"/></section><button class="btn btn-primary col-md-2">Upload</button>
+</section>
+        <section class="form-group">
+            <label class="control-label col-md-3">Description :</label>
+            <section class="col-md-9"><div id="summernote"></div></section>
+        </section>
+</section>
+    </form>
+</section>
+<section class="row">
+<section class="col-md-12 text-center"><button type="submit" class="btn btn-info" ng-click="save(event)">Save</button></section></section>
+
+<!-- Modal -->
+<div id="scheduleForm" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+          <table width="100%" class="table">
+              <thead>
+              <tr>
+    <th width="20%">Starts by</th>
+    <th width="20%">Ends by</th> 
+    <th width="60%">Schedule</th>
+  </tr>
+              </thead>
+          <tr ng-repeat="item in event.schedule" ng-model="event.schedule">
+              <td><input class="form-control" ng-model="item.starts"/></td>
+               <td><input class="form-control" ng-model="item.ends"/></td>
+               <td><input class="form-control" ng-model="item.schedule"/></td>
+              <td title="Delete row" ng-click="deleteRow(item)"><i class="fa fa-times" aria-hidden="true"></i></td>
+              </tr></table>
+        </div>
+         <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="addRow()">Add Row</button>
+      </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<section class="row">
+
+    <section class="col-md-12 border-top">
+        <section class="col-md-9">
+            <section class="col-md-12 mt-10">
+        <ul class="media-list">
+  <li ng-repeat ="blog in blogs" class="media" >
+    <div class="media-left">
+      <a href="#">
+        <img class="media-object" ng-src="{{blog.thumbnailSrc}}" alt="...">
+      </a>
+    </div>
+    <div class="media-body" ng-click="goToblog(blog.id)">
+      <a class="blog-link" href="/#/yoga/{{blog.id}}"><h4 class="media-heading">{{blog.title}}</h4></a>
+      {{blog.slicedContent}} ...
+    </div>
+  </li>
+</ul></section>
+        </section>
+        <section class="col-md-3">
+            <section class="col-md-12 pad-0">
+         <h3 class="font-22"><p><strong>UPCOMING EVENTS</strong></p></h3>
+               <section class="col-md-12 pad-0"> <div class="list-group"> <a ng-repeat ="event in filteredEvents" href="/#/event/{{event.id}}" class="list-group-item no-padding"><section class="list-group-item-text"><div class="input-group">
+  <span class="input-group-addon no-padding" id="sizing-addon1"><section class="date-section"><span class="font-2">{{event.startDay}}</span><br><span class="font-month">{{event.startMonth}} '{{event.startYear}}</span></section></span>
+  <section class="col-md-12"><span class="event-title">{{event.name}}</span><br><span class="event-text">{{event.slicedDesc}} ...</span></section>
+</div></section></a>  </div></section><section class="col-md-12 pad-0"><a href ="#/events" class="pull-right font-16 all-events-link"><strong>All Events</strong></a></section></section>
+                <section class="col-md-12 pad-0 mt-10"><section class="mb-10 embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Ye7Sm47EsWg" allowfullscreen></iframe>
+</section></section>
+        </section>
+    </section>
+</section>
