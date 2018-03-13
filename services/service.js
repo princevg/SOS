@@ -135,7 +135,6 @@ Service.prototype.saveNews = function(event) {
         console.error(err)
     })
 };
-
 Service.prototype.getNews = function(id) {
     return new Promise(
         function(resolve, reject) {
@@ -149,6 +148,34 @@ Service.prototype.getNews = function(id) {
                     }
                 });
         });
+};
+Service.prototype.updateNews = function(event) {
+    var file = './bin/news/' + event.id + '.json';
+    if (event.image != "") {
+        if (new RegExp(/^data:image\/png;base64,/).test(event.image)) {
+            var base64Data = event.image.replace(/^data:image\/png;base64,/, "");
+            event.image = '../bin/news/' + event.id + ".png";
+            var filePath = './public/bin/news/' + event.id + ".png";
+            fs.unlink('./public/bin/news/' + event.id + '.png', function(err) {
+                console.log(err);
+            });
+        } else {
+            var base64Data = event.image.replace(/^data:image\/jpeg;base64,/, "");
+            event.image = '../bin/news/' + event.id + ".jpg";
+            var filePath = './public/bin/news/' + event.id + ".jpg";
+            fs.unlink('./public/bin/news/' + event.id + '.jpg', function(err) {
+                console.log(err);
+            });
+        }
+        //event.image = "";
+        require("fs").writeFile(filePath, base64Data, 'base64', function(err) {
+            console.log(err);
+        });
+    }
+    jsonfile.writeFile(file, event, function(err) {
+        console.error(err)
+    })
+
 };
 
 Service.prototype.saveBlog = function(event) {
@@ -224,6 +251,7 @@ Service.prototype.getEvent = function(id) {
                 });
         });
 };
+
 
 Service.prototype.checkLogin = function(req) {
     return new Promise(
@@ -321,6 +349,7 @@ Service.prototype.ReadAllNews = function() {
 
         });
 };
+
 
 Service.prototype.ReadAllYogaBlogs = function() {
     var blogs = [];

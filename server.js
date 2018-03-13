@@ -146,6 +146,19 @@ app.get('/api/blog/getAllBlogs', function(req, res) {
         res.status(500).send(error);
     });
 });
+
+app.get('/api/news/getnews/:id', function(req, res) {
+    var id = req.params.id;
+    service.getNews(id).then((result) => {
+        res.send(result);
+    }).catch(function(error) {
+        res.status(500).send(error);
+    });
+});
+app.post('/api/news/updateNews', function(req, res) {
+    service.updateNews(req.body);
+    res.status(200).send("News has been saved successfully!!");
+});
 // listen (start app with node server.js) ======================================
 app.listen(8080);
 console.log("App listening on port 8080");
