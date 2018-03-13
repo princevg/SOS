@@ -157,8 +157,14 @@ app.get('/api/news/getnews/:id', function(req, res) {
 });
 app.post('/api/news/updateNews', function(req, res) {
     service.updateNews(req.body);
-    res.status(200).send("News has been saved successfully!!");
+    res.status(200).send("News has been updated successfully!!");
 });
+
+app.post('/api/news/delete', function(req, res) {
+    service.deleteNews(req.body);
+    res.status(200).send("The news has been deleted successfully!!");
+});
+
 // listen (start app with node server.js) ======================================
 app.listen(8080);
 console.log("App listening on port 8080");

@@ -178,6 +178,12 @@ Service.prototype.updateNews = function(event) {
 
 };
 
+Service.prototype.deleteNews = function(req) {
+    fs.unlink('./bin/news/' + req.id + '.json', function(err) {
+        console.log(err);
+    });
+};
+
 Service.prototype.saveBlog = function(event) {
     var token = crypto.randomBytes(8).toString('hex');
     var file = './bin/blogs/' + token + '.json';
