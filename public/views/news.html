@@ -42,6 +42,7 @@
         <th scope="col">Title</td>
         <th scope="col">Highlight</td>
         <th scope="col">Description</td>
+        <th scope="col">Action</td>
       </tr>
       </thead>
       <tbody>
@@ -49,6 +50,10 @@
         <td>{{newsData.title}}</td>
         <td>{{newsData.highlight}}</td>
         <td>{{newsData.description}}</td>
+        <td class="jsgrid">
+            <input class="jsgrid-button jsgrid-edit-button edit-news" ng-click="editNews(newsData.id)" type="button" title="Edit">
+            <input class="jsgrid-button jsgrid-delete-button delete-news" ng-click="deleteNews(newsData.id)" type="button" title="Delete">
+        </td>
       </tr>
     </tbody>
   </table>

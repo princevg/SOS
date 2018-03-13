@@ -37,6 +37,8 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
             $scope.news.description = '';
             $scope.news.highlight = '';
             getAllNews();
+        },function(error) {
+            console.log(error);            
         })
     }
     getAllNews();
@@ -48,9 +50,21 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
             $scope.newsDataSet = res.data;
         });
     }
+    $scope.editNews = function(id) {
+        $http.get('/api/news/getAll').then(function(res) {
+            //$scope.newsDataSet = [];
+            console.log(res);
+            $scope.newsDataSet = res.data;
+        });
+        console.log(id)
+    }
 
     $scope.blog = {};
     $scope.saveBlog = function(blog) {
+        if (!$('#blogDescription').summernote('code') || !blog.title || !blog.highlightText || !blog.image) {
+            alert('Please fill the form details');
+            return;
+        }
         blog.date = (new Date()).getTime();
         blog.description = $('#blogDescription').summernote('code');
         $http.post("/api/blog/save", blog).then(function(response) {
@@ -68,8 +82,12 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
         $('#blogDescription').summernote({
             height: 150, //set editable area's height
         });
+        $('#blogDescription').summernote('code', '');
     }
 
+    $scope.deleteNews = function(id) {
+         console.log(id)
+    }
 }])
 sosSettings.controller('eventsGridController', ['$scope', '$location', function($scope, $location) {
     $scope.editForm = function(id) {

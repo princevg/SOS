@@ -140,7 +140,7 @@ app.get('/settings', function(req, res) {
 
 app.get('/api/blog/getAllBlogs', function(req, res) {
     var events;
-    service.ReadAllYogaBlogs().then((result) => {
+    service.readAllBlogs().then((result) => {
         res.send(result);
     }).catch(function(error) {
         res.status(500).send(error);

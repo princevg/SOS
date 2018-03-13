@@ -2,7 +2,8 @@
 const nodemailer = require('nodemailer');
 var jsonfile = require('jsonfile');
 var fs = require("fs");
-var randtoken = require('rand-token');
+//var randtoken = require('rand-token');
+var crypto = require('crypto');
 var q = require('promise');
 
 /* Client-Secret Downloaded from Google Development */
@@ -126,7 +127,8 @@ Service.prototype.SaveEvent = function(event) {
 };
 
 Service.prototype.saveNews = function(event) {
-    var token = randtoken.generate(5);
+    //var token = randtoken.generate(5);
+    var token = crypto.randomBytes(8).toString('hex');
     var file = './bin/news/' + token + '.json';
     event.id = token;
     jsonfile.writeFile(file, event, function(err) {
@@ -150,7 +152,7 @@ Service.prototype.getNews = function(id) {
 };
 
 Service.prototype.saveBlog = function(event) {
-    var token = randtoken.generate(5);
+    var token = crypto.randomBytes(8).toString('hex');
     var file = './bin/blogs/' + token + '.json';
     event.id = token;
     if (new RegExp(/^data:image\/png;base64,/).test(event.image)) {
@@ -162,7 +164,6 @@ Service.prototype.saveBlog = function(event) {
         event.image = '../bin/blogs/' + token + ".jpg";
         var filePath = './public/bin/blogs/' + token + ".jpg";
     }
-    event.image = "";
     require("fs").writeFile(filePath, base64Data, 'base64', function(err) {
         console.log(err);
     });
