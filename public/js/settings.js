@@ -37,6 +37,8 @@ sosSettings.controller('settingsController', ['$scope', '$http', function($scope
             $scope.news.description = '';
             $scope.news.highlight = '';
             getAllNews();
+        },function(error) {
+            console.log(error);            
         })
     }
     getAllNews();
@@ -48,7 +50,18 @@ sosSettings.controller('settingsController', ['$scope', '$http', function($scope
             $scope.newsDataSet = res.data;
         });
     }
+    $scope.editNews = function(id) {
+        $http.get('/api/news/getAll').then(function(res) {
+            //$scope.newsDataSet = [];
+            console.log(res);
+            $scope.newsDataSet = res.data;
+        });
+        console.log(id)
+    }
 
+    $scope.deleteNews = function(id) {
+         console.log(id)
+    }
 
 }])
 sosSettings.controller('eventsGridController', ['$scope', '$location', function($scope, $location) {

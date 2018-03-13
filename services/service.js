@@ -2,7 +2,8 @@
 const nodemailer = require('nodemailer');
 var jsonfile = require('jsonfile');
 var fs = require("fs");
-var randtoken = require('rand-token');
+//var randtoken = require('rand-token');
+var crypto = require('crypto');
 var q = require('promise');
 
 /* Client-Secret Downloaded from Google Development */
@@ -126,7 +127,8 @@ Service.prototype.SaveEvent = function(event) {
 };
 
 Service.prototype.saveNews = function(event) {
-    var token = randtoken.generate(5);
+    //var token = randtoken.generate(5);
+    var token = crypto.randomBytes(8).toString('hex');
     var file = './bin/news/' + token + '.json';
     event.id = token;
     jsonfile.writeFile(file, event, function(err) {
