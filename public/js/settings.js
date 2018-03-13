@@ -12,7 +12,7 @@ sosSettings.config(function($routeProvider, $locationProvider) {
         });
 });
 
-sosSettings.controller('settingsController', ['$scope', '$http', function($scope, $http) {
+sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
     $scope.news = {};
     $scope.newsDataSet = [];
     $scope.logout = function() {
@@ -49,6 +49,26 @@ sosSettings.controller('settingsController', ['$scope', '$http', function($scope
         });
     }
 
+    $scope.blog = {};
+    $scope.saveBlog = function(blog) {
+        blog.date = (new Date()).getTime();
+        blog.description = $('#blogDescription').summernote('code');
+        $http.post("/api/blog/save", blog).then(function(response) {
+            $scope.successAlert = response.data;
+            $scope.blog = {};
+            $('#blogDescription').summernote('code', '');
+            angular.element("input[type='file']").val(null);
+            $timeout(function() {
+                $scope.$apply();
+            });
+        });
+    };
+
+    $scope.enableDescription = function() {
+        $('#blogDescription').summernote({
+            height: 150, //set editable area's height
+        });
+    }
 
 }])
 sosSettings.controller('eventsGridController', ['$scope', '$location', function($scope, $location) {
@@ -156,4 +176,6 @@ sosSettings.controller('eventController', ['$scope', '$http', '$routeParams', fu
         });
 
     };
+
+
 }]);

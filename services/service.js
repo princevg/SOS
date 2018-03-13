@@ -149,6 +149,52 @@ Service.prototype.getNews = function(id) {
         });
 };
 
+Service.prototype.saveBlog = function(event) {
+    var token = randtoken.generate(5);
+    var file = './bin/blogs/' + token + '.json';
+    event.id = token;
+    if (new RegExp(/^data:image\/png;base64,/).test(event.image)) {
+        var base64Data = event.image.replace(/^data:image\/png;base64,/, "");
+        event.image = '../bin/blogs/' + token + ".png";
+        var filePath = './public/bin/blogs/' + token + ".png";
+    } else {
+        var base64Data = event.image.replace(/^data:image\/jpeg;base64,/, "");
+        event.image = '../bin/blogs/' + token + ".jpg";
+        var filePath = './public/bin/blogs/' + token + ".jpg";
+    }
+    event.image = "";
+    require("fs").writeFile(filePath, base64Data, 'base64', function(err) {
+        console.log(err);
+    });
+    jsonfile.writeFile(file, event, function(err) {
+        console.error(err)
+    })
+
+};
+
+Service.prototype.readAllBlogs = function() {
+    var blogs = [];
+    return new Promise(
+        function(resolve, reject) {
+            var data = fs.readdirSync('./bin/blogs');
+
+            var length = data.length;
+            data.forEach(function(fileName, i) {
+                var event = readFilePromisified('./bin/blogs/' + fileName).then((blog, error) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        blogs.push(blog);
+                        if (i == length - 1)
+                            resolve(blogs);
+                    }
+                })
+            })
+
+        });
+
+};
+
 function readFilePromisified(filename) {
     return new Promise(
         function(resolve, reject) {
@@ -219,7 +265,7 @@ Service.prototype.getBlog = function(id) {
     return new Promise(
         function(resolve, reject) {
             var fileName = id + '.json';
-            jsonfile.readFile('./bin/blog/' + fileName,
+            jsonfile.readFile('./bin/blogs/' + fileName,
                 (error, data) => {
                     if (error) {
                         reject(error);
@@ -298,29 +344,7 @@ Service.prototype.ReadAllYogaBlogs = function() {
 
 
 };
-Service.prototype.ReadAllBlogs = function() {
-    var blogs = [];
-    return new Promise(
-        function(resolve, reject) {
-            var data = fs.readdirSync('./bin/blog');
 
-            var length = data.length;
-            data.forEach(function(fileName, i) {
-                var event = readFilePromisified('./bin/blog/' + fileName).then((blog, error) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        blogs.push(blog);
-                        if (i == length - 1)
-                            resolve(blogs);
-                    }
-                })
-            })
-
-        });
-
-
-};
 Service.prototype.saveYogaBlog = function(blog) {
     var token = randtoken.generate(5);
     var file = './bin/yoga/' + token + '.json';
@@ -342,7 +366,7 @@ Service.prototype.saveYogaBlog = function(blog) {
         console.error(err)
     })
 };
-Service.prototype.saveBlog = function(blog) {
+/*Service.prototype.saveBlog = function(blog) {
     var token = randtoken.generate(5);
     var file = './bin/blog/' + token + '.json';
     blog.id = token;
@@ -363,7 +387,7 @@ Service.prototype.saveBlog = function(blog) {
         console.error(err)
     })
 };
-
+*/
 
 
 module.exports = new Service();
