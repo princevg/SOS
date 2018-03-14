@@ -105,6 +105,33 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
         $('#blogDescription').summernote('code', '');
     }
 
+    $scope.santhiBlog = {};
+    $scope.savesanthiBlog = function(santhiBlog) {
+        if (!$('#santhiBlogDescription').summernote('code') || !santhiBlog.title || !santhiBlog.highlightText || !santhiBlog.image) {
+            alert('Please fill the form details');
+            return;
+        }
+        santhiBlog.date = (new Date()).getTime();
+        santhiBlog.description = $('#santhiBlogDescription').summernote('code');
+        $http.post("/api/santhiblog/save", santhiBlog).then(function(response) {
+            $scope.successAlert = response.data;
+            $scope.santhiBlog = {};
+            $('#santhiBlogDescription').summernote('code', '');
+            angular.element("input[type='file']").val(null);
+            
+            $timeout(function() {
+                $scope.$apply();
+            });
+        });
+    };
+
+    $scope.enableSanthiBlogDescription = function() {
+        $('#santhiBlogDescription').summernote({
+            height: 150, //set editable area's height
+        });
+        $('#santhiBlogDescription').summernote('code', '');
+    }
+
 }])
 sosSettings.controller('eventsGridController', ['$scope', '$location', function($scope, $location) {
     $scope.editForm = function(id) {

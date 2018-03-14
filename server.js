@@ -49,6 +49,21 @@ app.post('/api/yogablog/save', function(req, res) {
     service.saveYogaBlog(req.body);
     res.status(200).send("The blog has been saved successfully!!");
 });
+
+app.post('/api/santhiblog/save', function(req, res) {
+    service.saveSanthiBlog(req.body);
+    res.status(200).send("The blog has been saved successfully!!");
+});
+
+app.post('/api/blog/delete', function(req, res) {
+    service.deleteBlogs(req.body);
+    res.status(200).send("The event has been deleted successfully!!");
+});
+app.post('/api/santhiblog/delete', function(req, res) {
+    service.deleteSanthiBlogs(req.body);
+    res.status(200).send("The event has been deleted successfully!!");
+});
+
 app.post('/api/blog/save', function(req, res) {
     service.saveBlog(req.body);
     res.status(200).send("The blog has been saved successfully!!");
@@ -138,9 +153,27 @@ app.get('/settings', function(req, res) {
     }
 })
 
+app.get('/login', function(req, res) {
+    req.session.destroy(function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/#/login');
+        }
+    });
+})
+
 app.get('/api/blog/getAllBlogs', function(req, res) {
     var events;
     service.readAllBlogs().then((result) => {
+        res.send(result);
+    }).catch(function(error) {
+        res.status(500).send(error);
+    });
+});
+app.get('/api/santhiblog/getAllBlogs', function(req, res) {
+    var events;
+    service.getAllSanthBlogs().then((result) => {
         res.send(result);
     }).catch(function(error) {
         res.status(500).send(error);

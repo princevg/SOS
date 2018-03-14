@@ -206,6 +206,28 @@ Service.prototype.saveBlog = function(event) {
 
 };
 
+Service.prototype.saveSanthiBlog = function(event) {
+    var token = crypto.randomBytes(8).toString('hex');
+    var file = './bin/santhiblogs/' + token + '.json';
+    event.id = token;
+    if (new RegExp(/^data:image\/png;base64,/).test(event.image)) {
+        var base64Data = event.image.replace(/^data:image\/png;base64,/, "");
+        event.image = '../bin/santhiblogs/' + token + ".png";
+        var filePath = './public/bin/santhiblogs/' + token + ".png";
+    } else {
+        var base64Data = event.image.replace(/^data:image\/jpeg;base64,/, "");
+        event.image = '../bin/santhiblogs/' + token + ".jpg";
+        var filePath = './public/bin/santhiblogs/' + token + ".jpg";
+    }
+    require("fs").writeFile(filePath, base64Data, 'base64', function(err) {
+        console.log(err);
+    });
+    jsonfile.writeFile(file, event, function(err) {
+        console.error(err)
+    })
+
+};
+
 Service.prototype.readAllBlogs = function() {
     var blogs = [];
     return new Promise(
@@ -227,6 +249,47 @@ Service.prototype.readAllBlogs = function() {
 
         });
 
+};
+
+Service.prototype.getAllSanthBlogs = function() {
+    var blogs = [];
+    return new Promise(
+        function(resolve, reject) {
+            var data = fs.readdirSync('./bin/santhiblogs');
+
+            var length = data.length;
+            data.forEach(function(fileName, i) {
+                var event = readFilePromisified('./bin/santhiblogs/' + fileName).then((blog, error) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        blogs.push(blog);
+                        if (i == length - 1)
+                            resolve(blogs);
+                    }
+                })
+            })
+
+        });
+
+};
+
+Service.prototype.deleteBlogs = function(req) {
+    fs.unlink('./bin/blogs/' + req.id + '.json', function(err) {
+        console.log(err);
+    });
+    fs.unlink('./public/bin/blogs/' + req.id + '.json', function(err) {
+        console.log(err);
+    });
+};
+
+Service.prototype.deleteSanthiBlogs = function(req) {
+    fs.unlink('./bin/santhiblogs/' + req.id + '.json', function(err) {
+        console.log(err);
+    });
+    fs.unlink('./public/bin/santhiblogs/' + req.id + '.json', function(err) {
+        console.log(err);
+    });
 };
 
 function readFilePromisified(filename) {
@@ -301,6 +364,20 @@ Service.prototype.getBlog = function(id) {
         function(resolve, reject) {
             var fileName = id + '.json';
             jsonfile.readFile('./bin/blogs/' + fileName,
+                (error, data) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(data);
+                    }
+                });
+        });
+};
+Service.prototype.getSanthiBlog = function(id) {
+    return new Promise(
+        function(resolve, reject) {
+            var fileName = id + '.json';
+            jsonfile.readFile('./bin/santhiblogs/' + fileName,
                 (error, data) => {
                     if (error) {
                         reject(error);
