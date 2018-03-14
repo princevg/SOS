@@ -17,7 +17,8 @@ app1.config(function($routeProvider, $locationProvider) {
             templateUrl: "views/classes.html"
         })
         .when("/knowyoga", {
-            templateUrl: "views/wait.html"
+            templateUrl: "views/yoga-blog.html",
+            controller: 'homeController'
         })
         .when("/santhispeaks", {
             templateUrl: "views/wait.html"
@@ -46,11 +47,6 @@ app1.config(function($routeProvider, $locationProvider) {
         .when("/program/satsangs", {
             templateUrl: "views/satsang.html",
             controller: "satsangController"
-        })
-        .when("/knowyoga", {
-            templateUrl: "views/wait.html"
-            //templateUrl: "views/knowyoga.html",
-            //controller: "knowYogaController"
         })
         .when("/contactus", {
             templateUrl: "views/contact.html",
@@ -259,6 +255,9 @@ app1.controller('loginController', ['$scope', '$http', function($scope, $http) {
 }]);
 app1.controller('homeController', function($scope, $location, $http, eventsService, $timeout) {
     //$scope.toggleLink = true;
+    $scope.yoga = {};
+    $scope.yoga.blogs = [];
+    $scope.yoga.banner = "../bin/assets/banner.png"
     $scope.toggle = function() {
         $('.tab-disappear').toggle('slow', function() {
             if ($(this).children().hasClass("hide")) {
@@ -271,6 +270,12 @@ app1.controller('homeController', function($scope, $location, $http, eventsServi
             }
         });
     };
+    $scope.getAllYogaBlogs = function() {
+        $http.get('api/blog/getAllBlogs').then(function(res) {
+            $scope.yoga.blogs = res.data;
+        });
+    }
+    $scope.getAllYogaBlogs();
     $scope.length = $('.thumbnail[render]').children().find('iframe').length;
     $scope.fbRendered = function() {};
     $scope.goHome = function() {

@@ -1,8 +1,12 @@
-<section class="row">
-    <section class="col-md-9">
-        <section class="col-md-12">
-            <h1><strong>{{blog.title}}</strong></h1>
-        </section>
-        <section class="col-md-12" id="content"></section>
-    </section>
+<section class="container-fluid">
+	<img src="{{yoga.banner}}" class="banner">
+        <div class="card row col-md-12 homecard" ng-repeat="blog in yoga.blogs">
+                      <div class="card-body">
+                      <image src="{{blog.image}}" alt="Yoga">
+                      <div class="details">
+                          <h2>{{blog.title}}</h2>
+                          <p>{{blog.highlightText}} <a href="#">More...</a></p>
+                      </div>
+                      </div>
+                    </div>
 </section>
