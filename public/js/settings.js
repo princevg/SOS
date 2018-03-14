@@ -21,6 +21,13 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
         })
     }
 
+    $scope.getAllYogaBlogs = function() {
+        $http.get('api/blog/getAllBlogs').then(function(res) {
+            //$scope.newsDataSet = [];
+            console.log(res);
+        });
+    }
+
     $scope.saveNews = function() {
 
         if (!$scope.news.title || !$scope.news.description || !$scope.news.highlight) {
@@ -51,10 +58,20 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
         });
     }
     $scope.editNews = function(id) {
-        $http.get('/api/news/getAll').then(function(res) {
-            //$scope.newsDataSet = [];
+        $http.get('/api/news/getnews/'+id).then(function(res) {
+            $scope.news = res.data;
             console.log(res);
-            $scope.newsDataSet = res.data;
+            //$scope.newsDataSet = res.data;
+        });
+        console.log(id)
+    }
+
+    $scope.deleteNews = function(id) {
+         var data = {
+            "id": id
+        }
+        $http.post('/api/news/delete', data).then(function(res) {            
+            console.log(res);
         });
         console.log(id)
     }
@@ -72,6 +89,7 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
             $scope.blog = {};
             $('#blogDescription').summernote('code', '');
             angular.element("input[type='file']").val(null);
+            
             $timeout(function() {
                 $scope.$apply();
             });
@@ -85,9 +103,6 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
         $('#blogDescription').summernote('code', '');
     }
 
-    $scope.deleteNews = function(id) {
-         console.log(id)
-    }
 }])
 sosSettings.controller('eventsGridController', ['$scope', '$location', function($scope, $location) {
     $scope.editForm = function(id) {

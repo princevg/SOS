@@ -296,6 +296,7 @@ app1.controller('homeController', function($scope, $location, $http, eventsServi
         .then(function(response, err) {
             if (err)
                 return;
+            console.log(response)
             angular.forEach(response.data, function(event) {
                 event.startYear = event.startDate.split('/')[2].slice(2);
                 event.startMonth = event.startDate.split('/')[1];

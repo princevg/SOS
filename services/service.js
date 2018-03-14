@@ -143,7 +143,7 @@ Service.prototype.getNews = function(id) {
                 (error, data) => {
                     if (error) {
                         reject(error);
-                    } else {
+                    } else { 
                         resolve(data);
                     }
                 });
