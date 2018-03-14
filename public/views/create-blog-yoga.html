@@ -7,7 +7,7 @@
                     <strong>{{successAlert}} </strong> <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 </div>
             </section>
-            <section class="col-md-12 text-center">
+            <section class="col-md-12">
                 <section class="form-group">
                     <label class="control-label col-md-3">Title :</label>
                     <section class="col-md-6">
@@ -41,6 +41,16 @@
                 <section class="form-group">
                     <button type="submit" class="btn btn-info" ng-click="saveBlog(blog)">Save Blog</button>
                 </section>
+
+                    <div class="card row" ng-repeat="blog in yoga.blogs">
+                      <div class="card-body">
+                      <image src="{{blog.image}}" alt="Yoga">
+                      <div class="details">
+                          <h2>{{blog.title}}</h2>
+                          <p>{{blog.highlightText}} <a href="#">More...</a></p>
+                      </div>
+                      </div>
+                    </div>
             </section>
         </form>
     </section>

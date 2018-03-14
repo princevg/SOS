@@ -15,6 +15,8 @@ sosSettings.config(function($routeProvider, $locationProvider) {
 sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
     $scope.news = {};
     $scope.newsDataSet = [];
+    $scope.yoga = {};
+    $scope.yoga.blogs = [];    
     $scope.logout = function() {
         $http.get('/api/logout').then(function() {
             location.href = '../#/login';
@@ -23,11 +25,10 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
 
     $scope.getAllYogaBlogs = function() {
         $http.get('api/blog/getAllBlogs').then(function(res) {
-            //$scope.newsDataSet = [];
-            console.log(res);
+            $scope.yoga.blogs = res.data;
         });
     }
-
+    $scope.getAllYogaBlogs();
     $scope.saveNews = function() {
 
         if (!$scope.news.title || !$scope.news.description || !$scope.news.highlight) {
@@ -91,6 +92,7 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
             angular.element("input[type='file']").val(null);
             
             $timeout(function() {
+                 $scope.getAllYogaBlogs();
                 $scope.$apply();
             });
         });
