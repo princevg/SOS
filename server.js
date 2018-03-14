@@ -138,6 +138,16 @@ app.get('/settings', function(req, res) {
     }
 })
 
+app.get('/login', function(req, res) {
+    req.session.destroy(function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/#/login');
+        }
+    });
+})
+
 app.get('/api/blog/getAllBlogs', function(req, res) {
     var events;
     service.readAllBlogs().then((result) => {
