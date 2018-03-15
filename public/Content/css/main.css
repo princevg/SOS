@@ -849,7 +849,7 @@ h2.title {
 
 .custom-news-panel .panel-body {
     padding: 0px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .news-heading {
     width: 100%;
@@ -882,6 +882,11 @@ h2.title {
     cursor: pointer;
     max-height: 35px;
     overflow: hidden;
+}
+
+.news-section {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 ::-webkit-scrollbar {
