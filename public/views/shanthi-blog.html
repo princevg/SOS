@@ -1,10 +1,10 @@
 <section class="container-fluid">
-	<img src="{{yoga.banner}}" class="banner">
+	<img src="{{shanthi.banner}}" class="banner">
   <section class="col-md-8">
-      <div class="card row homecard" ng-repeat="blog in yoga.blogs">
+      <div class="card row homecard" ng-repeat="blog in shanthi.blogs">
           <div class="card-body">
-          <image src="{{blog.image}}" alt="Yoga" onerror="this.onerror=null;this.src='../bin/santhiblogs/shanthi.jpg'">
-          <div data-toggle="modal" class="details" ng-click="showSelectedYogaBlog(blog)" style="cursor:pointer" data-target="#detailedYogaModal">
+          <image src="{{blog.image}}" alt="Shanthi" onerror="this.onerror=null;this.src='../bin/santhiblogs/shanthi.jpg'">
+          <div data-toggle="modal" class="details" ng-click="showSelectedShanthiBlog(blog)" style="cursor:pointer" data-target="#detailedShanthiModal">
               <h2>{{blog.title}}</h2>
               <p>{{blog.highlightText}} <a href="#" ng-click = "prevent($event)">More...</a></p>
           </div>
@@ -26,17 +26,17 @@
   </section>
 </section>
 
-<div id="detailedYogaModal" class="modal fade" role="dialog">
+<div id="detailedShanthiModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <div><h3>{{yogaTitle}}<h3></div>
+                            <div><h3>{{shanthiTitle}}<h3></div>
                         </div>
                         <div class="modal-body">
-                            <p ng-bind-html="yogaDescription | to_trusted"></p>
+                            <p ng-bind-html="shanthiDescription | to_trusted"></p>
                             <div style="display: inline-block; width: 100%;">
-                                <button type="button" class="btn btn-danger pull-right" ng-click="closeYogaModal()">Close</button>
+                                <button type="button" class="btn btn-danger pull-right" ng-click="closeShanthiModal()">Close</button>
                             </div>
                         </div>
                         <!-- <div class="modal-footer">

@@ -18,10 +18,11 @@ app1.config(function($routeProvider, $locationProvider) {
         })
         .when("/knowyoga", {
             templateUrl: "views/yoga-blog.html",
-            controller: 'homeController'
+            controller: 'yogaBlogHomeController'
         })
         .when("/santhispeaks", {
-            templateUrl: "views/wait.html"
+            templateUrl: "views/shanthi-blog.html",
+            controller: 'shanthiBlogController'
         })
         .when("/inthemedia", {
             templateUrl: "views/wait.html"
@@ -79,7 +80,11 @@ app1.config(function($routeProvider, $locationProvider) {
             templateUrl: "home.html",
             controller: 'homeController'
         });
-});
+}).filter('to_trusted', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
+    }]);
 
 app1.directive('fileModel', ['$parse', function($parse) {
     return {
@@ -253,11 +258,55 @@ app1.controller('loginController', ['$scope', '$http', function($scope, $http) {
         });
     };
 }]);
-app1.controller('homeController', function($scope, $location, $http, eventsService, $timeout) {
-    //$scope.toggleLink = true;
+
+app1.controller('shanthiBlogController', function($scope, $location, $http, eventsService, $timeout) {
+    $scope.shanthi = {};
+    $scope.shanthi.blogs = [];
+    $scope.shanthi.banner = "../bin/assets/banner.png";
+
+    $scope.getAllShanthiBlogs = function() {
+        $http.get('/api/santhiblog/getAllBlogs').then(function(res) {
+            $scope.shanthi.blogs = res.data;
+        });
+    }
+    $scope.getAllShanthiBlogs();
+    $scope.showSelectedShanthiBlog = function (shanthiblog) {
+        $scope.shanthiTitle = shanthiblog.title;
+        $scope.shanthiDescription = shanthiblog.description;
+    }
+    $scope.closeShanthiModal = function () {
+        $('#detailedShanthiModal').modal('hide');
+    }
+    $scope.prevent = function (event) {
+        event.preventDefault();
+    }
+});
+
+app1.controller('yogaBlogHomeController', function($scope, $location, $http, eventsService, $timeout) {
     $scope.yoga = {};
     $scope.yoga.blogs = [];
-    $scope.yoga.banner = "../bin/assets/banner.png"
+    $scope.yoga.banner = "../bin/assets/banner.png";
+
+    $scope.getAllYogaBlogs = function() {
+        $http.get('api/blog/getAllBlogs').then(function(res) {
+            $scope.yoga.blogs = res.data;
+        });
+    }
+    $scope.getAllYogaBlogs();
+    $scope.showSelectedYogaBlog = function (yogablog) {
+        $scope.yogaTitle = yogablog.title;
+        $scope.yogaDescription = yogablog.description;
+    }
+    $scope.closeYogaModal = function () {
+        $('#detailedYogaModal').modal('hide');
+    }
+    $scope.prevent = function (event) {
+        event.preventDefault();
+    }
+});
+
+app1.controller('homeController', function($scope, $location, $http, eventsService, $timeout) {
+    //$scope.toggleLink = true;    
     $scope.toggle = function() {
         $('.tab-disappear').toggle('slow', function() {
             if ($(this).children().hasClass("hide")) {
@@ -270,12 +319,7 @@ app1.controller('homeController', function($scope, $location, $http, eventsServi
             }
         });
     };
-    $scope.getAllYogaBlogs = function() {
-        $http.get('api/blog/getAllBlogs').then(function(res) {
-            $scope.yoga.blogs = res.data;
-        });
-    }
-    $scope.getAllYogaBlogs();
+    
     $scope.length = $('.thumbnail[render]').children().find('iframe').length;
     $scope.fbRendered = function() {};
     $scope.goHome = function() {
@@ -334,7 +378,7 @@ app1.controller('homeController', function($scope, $location, $http, eventsServi
     $scope.showSelectedNews = function (news) {
         $scope.newsTitle = news.title;
         $scope.newsDescription = news.description;
-    }
+    }    
 
     $scope.closeNewsModal = function () {
         $('#detailedNewsModal').modal('hide');

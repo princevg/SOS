@@ -210,7 +210,7 @@ Service.prototype.saveSanthiBlog = function(event) {
     var token = crypto.randomBytes(8).toString('hex');
     var file = './bin/santhiblogs/' + token + '.json';
     event.id = token;
-    if (new RegExp(/^data:image\/png;base64,/).test(event.image)) {
+    if (new RegExp(/^data:image\/png;base64,/).test(event.image)) {        
         var base64Data = event.image.replace(/^data:image\/png;base64,/, "");
         event.image = '../bin/santhiblogs/' + token + ".png";
         var filePath = './public/bin/santhiblogs/' + token + ".png";
