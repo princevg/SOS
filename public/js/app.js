@@ -558,8 +558,18 @@ app1.controller('ModalInstanceCtrl', function($uibModalInstance, items) {
         $uibModalInstance.dismiss('cancel');
     };
 });
-app1.controller('contactController', function($scope) {
-    $scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3m9iYece09zWTYbxV9J8tiGWA7d0CCk";
+app1.controller('contactController', function($scope, $http) {
+    $scope.loadedInIndia = false;
+     $http.get("http://ip-api.com/json").then(function(response){
+        var locationDetails = response.data;
+        if(locationDetails.country.toLowerCase() == "india" && locationDetails.countryCode.toLowerCase() == "in"){
+            $scope.loadedInIndia = true;
+        }
+        else {
+            $scope.loadedInIndia = false;
+        }    
+        $scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3m9iYece09zWTYbxV9J8tiGWA7d0CCk";    
+    })        
 });
 app1.controller('yogaBlogController', function($scope, $http, $location) {
     $scope.blog = {};

@@ -2,20 +2,27 @@
     <section class="col-md-12">
         <section id="map" map-lazy-load="https://maps.google.com/maps/api/js"
   map-lazy-load-params="{{googleMapsUrl}}">
-         <ng-map zoom="19" center="8.500279, 76.959073" >
+         
+  <ng-map zoom="2" center="48.817590, 43.475915" ng-if="!loadedInIndia">
     <marker position="59.299494, 17.676269" title="Sweden" ></marker>
              <marker position="44.286173, 11.878831" title="Italy" ></marker>
              <marker position="55.751395, 37.534455" title="Russia" ></marker>
              <marker position="8.500300, 76.959073" title="Trivandrum"  animation-iteration="2"></marker>
              <marker position="12.979289, 80.223445" title="Velachery" ></marker>
              <marker position="12.964678, 80.206831" title="Velachery" ></marker>
-  </ng-map></section>
+  </ng-map>
+
+  <ng-map zoom="19" center="8.500279, 76.959073" ng-if="loadedInIndia">
+  </ng-map>
+
+  </section>
     </section>
-     <section class="col-md-12">
+  <section class="col-md-12" ng-if="loadedInIndia">
      <div class="text-center address-container">
         <img src="../bin/assets/address.png" class="Address">
         </div> 
-     </section>
+  </section>
+
     <section class="col-md-12">
         <h3>India</h3>
         <section class="col-md-4"><section class="col-md-12 border eq-ht"><h4 class="font-14"><strong>Trivandrum</strong></h4>
