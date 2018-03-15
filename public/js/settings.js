@@ -34,6 +34,11 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
         if (!$scope.news.title || !$scope.news.description || !$scope.news.highlight) {
             return;
         }
+
+        if ($scope.isEdit) {
+            $scope.deleteNews($scope.editNewsId);
+            $scope.isEdit = false;
+        }
         var data = {
             title: $scope.news.title,
             description: $scope.news.description,
@@ -56,12 +61,16 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
             //$scope.newsDataSet = [];
             console.log(res);
             $scope.newsDataSet = res.data;
+            
         });
     }
     $scope.editNews = function(id) {
         $http.get('/api/news/getnews/'+id).then(function(res) {
             $scope.news = res.data;
+            getAllNews();   
             console.log(res);
+            $scope.isEdit = true;
+            $scope.editNewsId = id;
             //$scope.newsDataSet = res.data;
         });
         console.log(id)
@@ -72,7 +81,10 @@ sosSettings.controller('settingsController', ['$scope', '$http', '$timeout', fun
             "id": id
         }
         $http.post('/api/news/delete', data).then(function(res) {            
-            console.log(res);
+            getAllNews();
+            $scope.news.title = '';
+            $scope.news.description = '';
+            $scope.news.highlight = '';
         });
         console.log(id)
     }
